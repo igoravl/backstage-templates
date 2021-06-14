@@ -1,20 +1,14 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Modelos Padrão do Backstage
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Este repositório contém os modelos "nativos" do Backstage do Banco Modal.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Estes modelos devem ser registrados em toda instância do Backstage, ou quando a instalação do Backstage for refeita do zero.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Modelos disponíveis
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+Os seguintes modelos estão disponíveis:
+
+1. **Modelo do Backstage**  
+   Este modelo é usado para a criação de um repositório para a criação de novos modelos personalizados do Backstage
+2. **[Repositório Git](backstage-templates?path=%2Fgit-repo%2FTemplate.yaml)**  
+   Este modelo cria novos repositórios Git vazios no Azure DevOps, opcionalmente inicializando com `.gitignore` e `README.md`
