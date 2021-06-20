@@ -5,63 +5,57 @@ metadata:
   name: git-repo
   title: Repositório Git
   description: Use este modelo para criar um novo repositório Git no Azure DevOps
+  tags: ['devops', 'azure-devops', 'git']
 spec:
   owner: cloudmotionbr/backstage
   type: devops
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
-    - title: Preencha os campos abaixo
+    - title: Informações sobre o repositório
       required:
         - name
+        - flowType
       properties:
         name:
-          title: Name
+          title: Nome do repositório
           type: string
-          description: Unique name of the component
-          ui:autofocus: true
-          ui:options:
-            rows: 5
-    - title: Choose a location
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository Location
+          description: Informe o nome do novo repositório Git. Use apenas letras, números e hífens.
+        flowType: 
+          title: Fluxo de trabalho Git 
           type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
+          description: Informe o fluxo de trabalho Git que será usado no seu repositório
+          enum:
+            - Nenhum
+            - GitFlow
+            - GitHubFlow
+        gitIgnore:
+          title: Arquivo .gitignore
+          type: string
+          description: Inclui arquivo .gitignore padrão no repositório?
+          enum: ['Node', 'VisualStudio', 'Global/VisualStudioCode']
+          enumNames: ['Node.js', 'Visual Studio', 'Visual Studio Code']
 
   # here's the steps that are executed in series in the scaffolder backend
   steps:
-    - id: fetch-base
-      name: Fetch Base
+    - id: download-readme
+      name: Fetch README
       action: fetch:cookiecutter
       input:
         url: ./template
         values:
           name: '{{ parameters.name }}'
-
-    - id: fetch-docs
-      name: Fetch Docs
-      action: fetch:plain
+          description: '{{ parameters.description }}'
+    - id: download-gitignore
+      name: Fetch .gitignore
+      action: fetch:file
+      if: '{{ parameters.gitIgnore }}'
       input:
-        targetPath: ./community
-        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
-
+        url: https://raw.githubusercontent.com/github/gitignore/master/{{ parameters.gitIgnore }}.gitignore
+        fileName: .gitignore
     - id: publish
       name: Publish
-      action: publish:github
+      action: publish:azure
       input:
-        allowedHosts: ['github.com']
         description: 'This is {{ parameters.name }}'
-        repoUrl: '{{ parameters.repoUrl }}'
-
-    - id: register
-      name: Register
-      action: catalog:register
-      input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
-        catalogInfoPath: '/catalog-info.yaml'
+        repoUrl: 'dev.azure.com?organization=cloudmotion-projetos&owner=banco%20modal&repo={{parameters.name}}'
