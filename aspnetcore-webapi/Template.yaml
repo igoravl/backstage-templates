@@ -20,6 +20,10 @@ spec:
           type: string
           description: Nome do seu projeto. Use apenas letras, números, pontos e hífens.
           ui:autofocus: true
+        title:
+          title: Título
+          type: string
+          description: Nome amigável do seu projeto, que será exibido no README e no catálogo de componentes.
         description:
           title: Descrição
           type: string
@@ -30,7 +34,6 @@ spec:
           title: Namespace-raíz
           type: string
           description: O namespace-raíz do projeto. Utilize apenas letras e pontos.
-          ui:autofocus: true
         owner:
           title: Proprietário
           description: O nome do usuário, equipe ou squad responsável por este projeto
@@ -56,6 +59,7 @@ spec:
         url: ./template
         values:
           name: '{{ parameters.name }}'
+          title: '{{ parameters.title }}'
           description: '{{ parameters.description }}'
           owner: '{{ parameters.owner }}'
 
