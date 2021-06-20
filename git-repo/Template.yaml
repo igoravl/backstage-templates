@@ -21,6 +21,12 @@ spec:
           title: Nome do repositório
           type: string
           description: Informe o nome do novo repositório Git. Use apenas letras, números e hífens.
+        description:
+          title: Descrição
+          type: string
+          description: Descrição do seu projeto/repositório.
+          ui:options:
+            rows: 5
         flowType: 
           title: Fluxo de trabalho Git 
           type: string
