@@ -1,0 +1,5 @@
+apiVersion: backstage.io/v1beta2
+kind: Service
+metadata:
+  name: {{ cookiecutter.name }}
+  description: {{ cookiecutter.description }}

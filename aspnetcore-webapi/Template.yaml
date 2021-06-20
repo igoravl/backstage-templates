@@ -1,51 +1,43 @@
 apiVersion: backstage.io/v1beta2
 kind: Template
-# some metadata about the template itself
 metadata:
-  name: backstage-template
-  title: Modelo do Backstage
-  description: Use este modelo para criar um novo modelo de componente no Backstage
+  name: aspnet-core-webapi
+  title: ASP.NET Core Web API
+  description: Use este modelo para criar um novo projeto de Web API usando o ASP.NET Core 5
+
 spec:
   owner: cloudmotionbr/backstage
-  type: devops
+  type: Service
 
-  # these are the steps which are rendered in the frontend with the form input
   parameters:
     - title: Preencha os campos abaixo
       required:
         - name
+        - owner
       properties:
         name:
           title: Nome
           type: string
-          description: Nome do seu modelo. Use apenas letras minúsculas, números e hífens.
+          description: Nome do seu projeto. Use apenas letras, números, pontos e hífens.
           ui:autofocus: true
-        title:
-          title: Título
-          type: string
-          description: Nome amigável do seu modelo, que será exibido na página de criação de componentes do Backstage.
         description:
           title: Descrição
           type: string
-          description: Texto descritivo do seu modelo.
+          description: Breve descrição do seu projeto.
           ui:options:
             rows: 5
-        type:
-          title: Categoria
+        namespace:
+          title: Namespace-raíz
           type: string
-          description: A categoria em que seu componente se enquadra. Alguns dos valores válidos são "Website", "Service", "Library", "Component"
-        tags:
-          title: Tags
-          type: string
-          description: Lista de tags para classificar seu modelo, separadas por vírgulas
+          description: O namespace-raíz do projeto. Utilize apenas letras e pontos.
+          ui:autofocus: true
         owner:
           title: Proprietário
-          description: O nome do usuário, equipe ou squad responsável por este componente
+          description: O nome do usuário, equipe ou squad responsável por este projeto
           type: string
           ui:field: OwnerPicker
     - title: Escolha o local de criação
       required:
-        - owner
         - repoUrl
       properties:
         repoUrl:
@@ -56,20 +48,16 @@ spec:
             allowedHosts:
               - dev.azure.com
 
-  # here's the steps that are executed in series in the scaffolder backend
   steps:
-    - id: fetch-base
-      name: Fetch Base
+    - id: fetch-code
+      name: Fetch Source Code
       action: fetch:cookiecutter
       input:
         url: ./template
         values:
           name: '{{ parameters.name }}'
-          title: '{{ parameters.title }}'
           description: '{{ parameters.description }}'
           owner: '{{ parameters.owner }}'
-          type: '{{ parameters.type }}'
-          tags: '{{ parameters.tags }}'
 
     - id: publish
       name: Publish
