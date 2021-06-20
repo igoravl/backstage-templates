@@ -3,8 +3,8 @@ kind: Template
 # some metadata about the template itself
 metadata:
   name: backstage-template
-  title: Repositório Git
-  description: Use este modelo para criar um novo repositório Git no Azure DevOps
+  title: Modelo do Backstage
+  description: Use este modelo para criar um novo modelo de componente no Backstage
 spec:
   owner: cloudmotionbr/backstage
   type: devops
