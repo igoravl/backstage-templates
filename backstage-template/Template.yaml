@@ -16,12 +16,28 @@ spec:
         - name
       properties:
         name:
-          title: Name
+          title: Nome
           type: string
-          description: Unique name of the component
+          description: Nome do seu modelo. Use apenas letras minúsculas, números e hífens.
           ui:autofocus: true
+        title:
+          title: Título
+          type: string
+          description: Nome amigável do seu modelo, que será exibido na página de criação de componentes do Backstage.
+        description:
+          title: Descrição
+          type: string
+          description: Texto descritivo do seu modelo.
           ui:options:
             rows: 5
+        type:
+          title: Categoria
+          type: string
+          description: A categoria em que seu componente se enquadra. Alguns dos valores válidos são "Website", "Service", "Library", "Component"
+        tags:
+          title: Tags
+          type: string
+          description: Lista de tags para classificar seu modelo, separadas por vírgulas
     - title: Choose a location
       required:
         - repoUrl
@@ -32,7 +48,7 @@ spec:
           ui:field: RepoUrlPicker
           ui:options:
             allowedHosts:
-              - github.com
+              - dev.azure.com
 
   # here's the steps that are executed in series in the scaffolder backend
   steps:
@@ -43,13 +59,6 @@ spec:
         url: ./template
         values:
           name: '{{ parameters.name }}'
-
-    - id: fetch-docs
-      name: Fetch Docs
-      action: fetch:plain
-      input:
-        targetPath: ./community
-        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
 
     - id: publish
       name: Publish
