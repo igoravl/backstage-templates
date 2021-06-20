@@ -5,6 +5,7 @@ metadata:
   name: {{name}}
   title: {{title}}
   description: {{description}}
+  tags: [ {{tags}} ]
 spec:
   owner: {{owner}}
   type: {{type}}
