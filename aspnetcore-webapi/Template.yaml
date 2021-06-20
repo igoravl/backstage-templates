@@ -65,7 +65,7 @@ spec:
           owner: '{{ parameters.owner }}'
 
     - id: publish
-      name: Publish
+      name: Publish repository to Azure DevOps
       action: publish:azure
       input:
         allowedHosts:
@@ -74,7 +74,7 @@ spec:
         repoUrl: '{{ parameters.repoUrl }}'
 
     - id: enable-build
-      name: Enable CI pipeline
+      name: Enable CI pipeline in Azure DevOps
       action: azure:pipelines:create
       input:
         name: '{{ parameters.name }}-CI'
@@ -82,7 +82,7 @@ spec:
         sourcePath: 'azure-pipelines.yaml'
 
     - id: register
-      name: Register
+      name: Register component in Backstage Catalog
       action: catalog:register
       input:
         repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
