@@ -44,7 +44,8 @@ spec:
         - repoUrl
       properties:
         owner:
-          title: Team Project
+          title: Proprietário
+          description: O nome do usuário, equipe ou squad responsável por este componente
           type: string
           ui:field: OwnerPicker
         repoUrl:
