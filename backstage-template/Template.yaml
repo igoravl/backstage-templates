@@ -59,6 +59,10 @@ spec:
         url: ./template
         values:
           name: '{{ parameters.name }}'
+          title: '{{ parameters.title }}'
+          description: '{{ parameters.description }}'
+          type: '{{ parameters.type }}'
+          tags: '{{ parameters.tags }}'
 
     - id: publish
       name: Publish
