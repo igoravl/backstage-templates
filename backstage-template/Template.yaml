@@ -38,10 +38,15 @@ spec:
           title: Tags
           type: string
           description: Lista de tags para classificar seu modelo, separadas por vírgulas
-    - title: Choose a location
+    - title: Escolha o local de criação
       required:
+        - owner
         - repoUrl
       properties:
+        owner:
+          title: Team Project
+          type: string
+          ui:field: OwnerPicker
         repoUrl:
           title: Repository Location
           type: string
@@ -72,7 +77,6 @@ spec:
         - dev.azure.com
         description: 'This is {{ parameters.name }}'
         repoUrl: '{{ parameters.repoUrl }}'
-        sourcePath: template
 
     - id: register
       name: Register

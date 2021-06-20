@@ -2,13 +2,13 @@ apiVersion: backstage.io/v1beta2
 kind: Template
 # some metadata about the template itself
 metadata:
-  name: {{name}}
-  title: {{title}}
-  description: {{description}}
-  tags: [ {{tags}} ]
+  name: {{ cookiecutter.name }}
+  title: {{ cookiecutter.title }}
+  description: {{ cookiecutter.description }}
+  tags: [ {{ cookiecutter.tags }} ]
 spec:
-  owner: {{owner}}
-  type: {{type}}
+  owner: {{ cookiecutter.owner }}
+  type: {{ cookiecutter.type }}
 
   # Estes serão os parâmetros do seu modelo. Altere-os de acordo com sua necessidade
 
@@ -45,7 +45,7 @@ spec:
       input:
         url: ./template
         values:
-          name: '{{ parameters.name }}'
+          name: '{{"{{"}} parameters.name }}'
 
     - id: publish
       name: Publish
@@ -53,5 +53,5 @@ spec:
       input:
         allowedHosts:
         - dev.azure.com
-        description: 'This is {{ parameters.name }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+        description: 'This is {{"{{"}} parameters.name }}'
+        repoUrl: '{{"{{"}} parameters.repoUrl }}'
