@@ -4,7 +4,7 @@ kind: Template
 metadata:
   name: {{name}}
   title: {{title}}
-  description: {description}
+  description: {{description}}
 spec:
   owner: {{owner}}
   type: {{type}}
