@@ -73,6 +73,14 @@ spec:
         description: 'This is {{ parameters.name }}'
         repoUrl: '{{ parameters.repoUrl }}'
 
+    - id: enable-build
+      name: Enable CI pipeline
+      action: azure:pipelines:create
+      input:
+        name: '{{ parameters.name }}-CI'
+        repoUrl: '{{ parameters.repoUrl }}'
+        sourcePath: 'azure-pipelines.yaml'
+
     - id: register
       name: Register
       action: catalog:register
