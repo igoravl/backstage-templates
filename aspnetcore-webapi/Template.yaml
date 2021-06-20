@@ -61,6 +61,7 @@ spec:
           name: '{{ parameters.name }}'
           title: '{{ parameters.title }}'
           description: '{{ parameters.description }}'
+          namespace: '{{ parameters.namespace }}'
           owner: '{{ parameters.owner }}'
 
     - id: publish
