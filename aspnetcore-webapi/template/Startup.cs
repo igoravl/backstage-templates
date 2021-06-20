@@ -30,7 +30,7 @@ namespace {{ cookiecutter.namespace }}
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "{{ cookiecutter.name }}", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "{{ cookiecutter.title }}", Version = "v1" });
             });
         }
 
