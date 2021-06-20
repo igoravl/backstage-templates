@@ -2,8 +2,8 @@ apiVersion: backstage.io/v1beta2
 kind: Template
 metadata:
   name: aspnet-core-webapi
-  title: ASP.NET Core Web API
-  description: Use este modelo para criar um novo projeto de Web API usando o ASP.NET Core 5
+  title: ASP.NET Core 5.0 Web API
+  description: Use este modelo para criar um novo projeto de Web API usando o ASP.NET Core 5.0
 
 spec:
   owner: cloudmotionbr/backstage
