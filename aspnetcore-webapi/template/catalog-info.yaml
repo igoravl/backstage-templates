@@ -6,5 +6,5 @@ metadata:
   description: {{ cookiecutter.description }}
 spec:
   type: service
-  lifecycle: production
+  lifecycle: development
   owner: {{ cookiecutter.owner }}
