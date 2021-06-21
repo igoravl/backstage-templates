@@ -41,6 +41,13 @@ spec:
           description: Inclui arquivo .gitignore padrão no repositório?
           enum: ['Node', 'VisualStudio', 'Global/VisualStudioCode']
           enumNames: ['Node.js', 'Visual Studio', 'Visual Studio Code']
+        owner:
+          title: Squad
+          description: O nome da squad responsável por este repositório
+          type: string
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds: [ 'Group' ]
 
   # here's the steps that are executed in series in the scaffolder backend
   steps:
@@ -63,5 +70,5 @@ spec:
       name: Publish
       action: publish:azure
       input:
-        description: 'This is {{ parameters.name }}'
-        repoUrl: 'dev.azure.com?organization=cloudmotion-projetos&owner=banco%20modal&repo={{parameters.name}}'
+        allowedHosts: ['dev.azure.com']
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
