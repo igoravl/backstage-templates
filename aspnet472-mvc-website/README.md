@@ -1,3 +1,3 @@
-# Template: ASP.NET Core Web API
+# Template: ASP.NETMVC Web Site (.NET Framework 4.7.2)
 
-Este modelo do Backstage gera um novo projeto do tipo ASP.NET Core 5 Web API, com um pipeline de CI já preparado para compilar a aplicação.
+Este modelo do Backstage gera um novo projeto do tipo ASP.NET MVC Web Site (.NET Framework 4.7.2), com um pipeline de CI já preparado para compilar a aplicação.
