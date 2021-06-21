@@ -92,5 +92,5 @@ spec:
       name: Queue pipeline in Azure DevOps
       action: azure:pipelines:queue
       input:
-        id: '{{ steps.enable-build.outputs.id }}'
+        id: '{{ steps.enable-build.output.id }}'
         repoUrl: '{{ parameters.repoUrl }}'
