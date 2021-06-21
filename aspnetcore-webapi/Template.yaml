@@ -87,3 +87,10 @@ spec:
       input:
         repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
         catalogInfoPath: 'catalog-info.yaml'
+
+    - id: queue-build
+      name: Queue pipeline in Azure DevOps
+      action: azure:pipelines:queue
+      input:
+        id: '{{ steps.enable-build.outputs.id }}'
+        repoUrl: '{{ parameters.repoUrl }}'
