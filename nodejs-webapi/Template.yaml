@@ -1,0 +1,91 @@
+apiVersion: backstage.io/v1beta2
+kind: Template
+metadata:
+  name: nodejs-express-webapi
+  title: Node.js Web API with Express
+  description: Use este modelo para criar um novo projeto de Web API usando Node.js com o framework Express
+
+spec:
+  owner: cloudmotionbr/backstage
+  type: Service
+
+  parameters:
+    - title: Preencha os campos abaixo
+      required:
+        - name
+        - owner
+      properties:
+        name:
+          title: Nome
+          type: string
+          description: Nome do seu projeto. Use apenas letras, números, pontos e hífens.
+          ui:autofocus: true
+        title:
+          title: Título
+          type: string
+          description: Nome amigável do seu projeto, que será exibido no README e no catálogo de componentes.
+        description:
+          title: Descrição
+          type: string
+          description: Breve descrição do seu projeto.
+          ui:options:
+            rows: 5
+        owner:
+          title: Proprietário
+          description: O nome do usuário, equipe ou squad responsável por este projeto
+          type: string
+          ui:field: OwnerPicker
+    - title: Escolha o local de criação
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - dev.azure.com
+
+  steps:
+    - id: fetch-code
+      name: Generate code
+      action: fetch:cookiecutter
+      input:
+        url: ./template
+        values:
+          name: '{{ parameters.name }}'
+          title: '{{ parameters.title }}'
+          description: '{{ parameters.description }}'
+          owner: '{{ parameters.owner }}'
+
+    - id: publish
+      name: Publish repository
+      action: publish:azure
+      input:
+        allowedHosts:
+        - dev.azure.com
+        description: 'This is {{ parameters.name }}'
+        repoUrl: '{{ parameters.repoUrl }}'
+
+    - id: enable-build
+      name: Enable CI pipeline
+      action: azure:pipelines:create
+      input:
+        name: '{{ parameters.name }}-CI'
+        repoUrl: '{{ parameters.repoUrl }}'
+        sourcePath: 'azure-pipelines.yaml'
+
+    - id: register
+      name: Register component
+      action: catalog:register
+      input:
+        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
+        catalogInfoPath: 'catalog-info.yaml'
+
+    - id: queue-build
+      name: Queue pipeline
+      action: azure:pipelines:queue
+      input:
+        id: '{{ steps.enable-build.output.id }}'
+        repoUrl: '{{ parameters.repoUrl }}'
