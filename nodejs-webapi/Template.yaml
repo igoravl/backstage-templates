@@ -11,9 +11,7 @@ spec:
 
   parameters:
     - title: Preencha os campos abaixo
-      required:
-        - name
-        - owner
+      required: [name, title, owner]
       properties:
         name:
           title: Nome
@@ -35,7 +33,6 @@ spec:
           description: O nome da squad responsável por este projeto
           type: string
           ui:field: OwnerPicker
-          ui:options: 
             allowedKinds: ['Group']
 
   steps:

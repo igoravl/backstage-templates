@@ -11,9 +11,7 @@ spec:
 
   parameters:
     - title: Preencha os campos abaixo
-      required:
-        - name
-        - owner
+      required: [name, title, namespace, owner]
       properties:
         name:
           title: Nome
