@@ -75,4 +75,4 @@ spec:
       action: azure:pipelines:queue
       input:
         id: '{{ steps.enable-build.output.id }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
