@@ -33,6 +33,7 @@ spec:
           description: O nome da squad responsável por este projeto
           type: string
           ui:field: OwnerPicker
+          ui:options:
             allowedKinds: ['Group']
 
   steps:
