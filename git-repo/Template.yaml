@@ -72,3 +72,9 @@ spec:
       input:
         allowedHosts: ['dev.azure.com']
         repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+    - id: create-develop
+      name: Create develop branch
+      action: azure:repos:new-branch
+      input:
+        name: develop
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
