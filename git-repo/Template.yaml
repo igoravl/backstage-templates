@@ -15,7 +15,7 @@ spec:
     - title: Informações sobre o repositório
       required:
         - name
-        - flowType
+        - gitFlow
       properties:
         name:
           title: Nome do repositório
