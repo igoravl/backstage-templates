@@ -31,6 +31,7 @@ spec:
           title: Fluxo de trabalho Git 
           type: boolean
           description: Informe o fluxo de trabalho Git que será usado no seu repositório
+          ui:widget: radio
           enumNames:
             - GitFlow
             - GitHubFlow
