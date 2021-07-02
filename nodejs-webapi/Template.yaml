@@ -10,8 +10,8 @@ spec:
   type: service
 
   parameters:
-    - title: Preencha os campos abaixo
-      required: [name, title, owner]
+    - title: Configurações do projeto
+      required: [name, title, description]
       properties:
         name:
           title: Nome
@@ -28,13 +28,24 @@ spec:
           description: Breve descrição do seu projeto.
           ui:options:
             rows: 5
+    - title: Configurações do repositório
+      required: [ 'gitFlow' ]
+      properties:
+        gitFlow: 
+          title: Fluxo de trabalho Git 
+          type: boolean
+          description: Informe o fluxo de trabalho Git que será usado no seu repositório
+          ui:widget: radio
+          enumNames:
+            - GitFlow
+            - GitHubFlow
         owner:
           title: Squad
           description: O nome da squad responsável por este projeto
           type: string
           ui:field: OwnerPicker
           ui:options:
-            allowedKinds: ['Group']
+            allowedKinds: [ 'Group' ]
 
   steps:
     - id: fetch-code
@@ -46,6 +57,7 @@ spec:
           name: '{{ parameters.name }}'
           title: '{{ parameters.title }}'
           description: '{{ parameters.description }}'
+          namespace: '{{ parameters.namespace }}'
           owner: '{{ parameters.owner }}'
 
     - id: publish
@@ -62,6 +74,31 @@ spec:
         name: '{{ parameters.name }}-CI'
         repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
         sourcePath: 'azure-pipelines.yaml'
+
+    - id: create-develop
+      name: Create develop branch
+      action: azure:repos:new-branch
+      if: '{{ parameters.gitFlow }}'
+      input:
+        name: develop
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+
+    - id: enable-develop-branch-policy
+      name: Enable branch policy for develop
+      action: azure:repos:enable-branch-policy
+      if: '{{ parameters.gitFlow }}'
+      input:
+        name: develop
+        buildDefinitionId: "{{ steps.enable-build.output.id }}"
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+
+    - id: enable-master-branch-policy
+      name: Enable branch policy for master
+      action: azure:repos:enable-branch-policy
+      input:
+        name: master
+        buildDefinitionId: "{{ steps.enable-build.output.id }}"
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
 
     - id: register
       name: Register component

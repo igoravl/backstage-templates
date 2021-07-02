@@ -11,9 +11,8 @@ spec:
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
-    - title: Preencha os campos abaixo
-      required:
-        - name
+    - title: Configurações do projeto
+      required: [name, title, description, category, tags]
       properties:
         name:
           title: Nome
@@ -38,6 +37,17 @@ spec:
           title: Tags
           type: string
           description: Lista de tags para classificar seu modelo, separadas por vírgulas
+    - title: Configurações do repositório
+      required: [ 'gitFlow' ]
+      properties:
+        gitFlow: 
+          title: Fluxo de trabalho Git 
+          type: boolean
+          description: Informe o fluxo de trabalho Git que será usado no seu repositório
+          ui:widget: radio
+          enumNames:
+            - GitFlow
+            - GitHubFlow
         owner:
           title: Squad
           description: O nome da squad responsável por este projeto
@@ -66,6 +76,29 @@ spec:
       action: publish:azure
       input:
         allowedHosts: ['dev.azure.com']
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+
+    - id: create-develop
+      name: Create develop branch
+      action: azure:repos:new-branch
+      if: '{{ parameters.gitFlow }}'
+      input:
+        name: develop
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+
+    - id: enable-develop-branch-policy
+      name: Enable branch policy for develop
+      action: azure:repos:enable-branch-policy
+      if: '{{ parameters.gitFlow }}'
+      input:
+        name: develop
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+
+    - id: enable-master-branch-policy
+      name: Enable branch policy for master
+      action: azure:repos:enable-branch-policy
+      input:
+        name: master
         repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
 
     - id: register
