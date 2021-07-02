@@ -29,7 +29,7 @@ spec:
           ui:options:
             rows: 5
     - title: Configurações do repositório
-      required: [ 'gitFlow' ]
+      required: [ gitFlow, owner ]
       properties:
         gitFlow: 
           title: Fluxo de trabalho Git 

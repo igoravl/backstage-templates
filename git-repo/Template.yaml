@@ -13,9 +13,7 @@ spec:
   # these are the steps which are rendered in the frontend with the form input
   parameters:
     - title: Informações sobre o repositório
-      required:
-        - name
-        - gitFlow
+      required: [ name, description, gitFlow, owner]
       properties:
         name:
           title: Nome do repositório

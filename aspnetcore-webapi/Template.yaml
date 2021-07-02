@@ -33,7 +33,7 @@ spec:
           type: string
           description: O namespace-raíz do projeto. Utilize apenas letras e pontos.
     - title: Configurações do repositório
-      required: [ 'gitFlow' ]
+      required: [ gitFlow, owner ]
       properties:
         gitFlow: 
           title: Fluxo de trabalho Git 

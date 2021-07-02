@@ -12,7 +12,7 @@ spec:
   # these are the steps which are rendered in the frontend with the form input
   parameters:
     - title: Configurações do projeto
-      required: [name, title, description, category, tags]
+      required: [name, title, description, type, tags]
       properties:
         name:
           title: Nome
@@ -38,7 +38,7 @@ spec:
           type: string
           description: Lista de tags para classificar seu modelo, separadas por vírgulas
     - title: Configurações do repositório
-      required: [ 'gitFlow' ]
+      required: [ gitFlow, owner ]
       properties:
         gitFlow: 
           title: Fluxo de trabalho Git 
