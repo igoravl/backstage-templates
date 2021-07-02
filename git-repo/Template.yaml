@@ -79,8 +79,15 @@ spec:
         name: develop
         repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
     - id: enable-develop-branch-policy
-      name: Enable branch policy for develop branch
+      name: Enable branch policy for develop
       action: azure:repos:enable-branch-policy
+      if: '{{ parameters.gitFlow }}'
       input:
         name: develop
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+    - id: enable-master-branch-policy
+      name: Enable branch policy for master
+      action: azure:repos:enable-branch-policy
+      input:
+        name: master
         repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
