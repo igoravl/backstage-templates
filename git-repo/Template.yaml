@@ -27,12 +27,11 @@ spec:
           description: Descrição do seu projeto/repositório.
           ui:options:
             rows: 5
-        flowType: 
+        gitFlow: 
           title: Fluxo de trabalho Git 
-          type: string
+          type: boolean
           description: Informe o fluxo de trabalho Git que será usado no seu repositório
-          enum:
-            - Nenhum
+          enumNames:
             - GitFlow
             - GitHubFlow
         gitIgnore:
@@ -75,6 +74,7 @@ spec:
     - id: create-develop
       name: Create develop branch
       action: azure:repos:new-branch
+      if: '{{ parameters.gitFlow }}'
       input:
         name: develop
         repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
