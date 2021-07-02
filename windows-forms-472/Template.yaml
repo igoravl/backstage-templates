@@ -93,7 +93,7 @@ spec:
       if: '{{ parameters.gitFlow }}'
       input:
         name: develop
-        buildDefinitionId: '{{ steps.enable-build.outputs.id }}'
+        buildDefinitionId: '{{ steps.enable-build.output.id }}'
         repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
 
     - id: enable-master-branch-policy
@@ -101,7 +101,7 @@ spec:
       action: azure:repos:enable-branch-policy
       input:
         name: master
-        buildDefinitionId: '{{ steps.enable-build.outputs.id }}'
+        buildDefinitionId: '{{ steps.enable-build.output.id }}'
         repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
 
     - id: register
