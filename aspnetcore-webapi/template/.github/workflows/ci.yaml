@@ -22,7 +22,7 @@ jobs:
         fetch-depth: 0
     - name: 'dotnet publish'
       run: |
-        dotnet publish --configuration ${{buildConfiguration}} --output ${{GITHUB_WORKSPACE}}/out
+        dotnet publish --configuration ${{env.buildConfiguration}} --output ${{GITHUB_WORKSPACE}}/out
     - name: Publish artifact
       uses: actions/upload-artifact@v2
       with:
