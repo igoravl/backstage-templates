@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+runs-on: ubuntu-latest
+
+env:
+  buildConfiguration: 'Release'
+
+jobs:
+
+  Build: 
+    steps:
+    - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+    - name: 'dotnet publish'
+      run: |
+        dotnet publish --configuration ${{buildConfiguration}} --output ${{GITHUB_WORKSPACE}}/out
+    - name: 'Create Zip file'
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/{{ cookiecutter.name }}.zip'
+        replaceExistingArchive: true
+        verbose: true
+    - name: Publish artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: zip
+        path: "out/**"
