@@ -5,7 +5,7 @@ metadata:
   title: {{ cookiecutter.title }}
   description: {{ cookiecutter.description }}
   annotations:
-    github.com/project-slug: {{ cookiecutter.organization }}/{{ cookiecutter.repo }}
+    github.com/project-slug: {{ cookiecutter.destination }}
 spec:
   type: service
   lifecycle: development
