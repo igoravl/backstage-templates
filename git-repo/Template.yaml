@@ -53,7 +53,7 @@ spec:
       name: Debug
       action: debug:log
       input:
-        message: "! dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ (parameters.owner | split '/')[1] }}-${{ parameters.name }}"
+        message: '! dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ (parameters.owner | split("/"))[1] }}-${{ parameters.name }}'
     - id: download-readme
       name: Fetch README
       action: fetch:template
