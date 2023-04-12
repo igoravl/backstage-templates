@@ -57,19 +57,20 @@ spec:
         values:
           name: '${{ parameters.name }}'
           description: '${{ parameters.description }}'
-    - id: download-gitignore
-      name: Fetch .gitignore
-      action: fetch:file
-      if: '${{ parameters.gitIgnore }}'
-      input:
-        url: https://raw.githubusercontent.com/github/gitignore/master/${{ parameters.gitIgnore }}.gitignore
-        fileName: .gitignore
+    # - id: download-gitignore
+    #   name: Fetch .gitignore
+    #   action: fetch:file
+    #   if: '${{ parameters.gitIgnore }}'
+    #   input:
+    #     url: https://raw.githubusercontent.com/github/gitignore/master/${{ parameters.gitIgnore }}.gitignore
+    #     fileName: .gitignore
     - id: publish
       name: Publish
       action: publish:azure
       input:
         allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}&organization=tshooter'
+
     - id: create-develop
       name: Create develop branch
       action: azure:repos:new-branch
