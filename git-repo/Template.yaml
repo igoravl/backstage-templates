@@ -49,6 +49,11 @@ spec:
 
   # here's the steps that are executed in series in the scaffolder backend
   steps:
+    - id: debug
+      name: Debug
+      action: debug:log
+      input:
+        message: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
     - id: download-readme
       name: Fetch README
       action: fetch:template
