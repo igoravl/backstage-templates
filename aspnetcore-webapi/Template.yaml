@@ -59,20 +59,20 @@ spec:
         copyWithoutRender:
           - .github/workflows/*
         values:
-          name: '${{parameters.name }}'
-          title: '${{parameters.title }}'
-          description: '${{parameters.description }}'
-          namespace: '${{parameters.namespace }}'
+          name: '${{ parameters.name }}'
+          title: '${{ parameters.title }}'
+          description: '${{ parameters.description }}'
+          namespace: '${{ parameters.namespace }}'
           destination: '{{ parameters.repoUrl | parseRepoUrl }}'
-          owner: '${{parameters.owner }}'
+          owner: '${{ parameters.owner }}'
 
     - id: publish
       name: Publish
       action: publish:github
       input:
         allowedHosts: ['github.com']
-        description: '${{parameters.title }}'
-        repoUrl: '${{parameters.repoUrl }}'
+        description: '${{ parameters.title }}'
+        repoUrl: '${{ parameters.repoUrl }}'
 
     - id: register
       name: Register
