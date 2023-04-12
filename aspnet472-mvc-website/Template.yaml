@@ -78,7 +78,8 @@ spec:
       action: publish:azure
       input:
         allowedHosts: [ github.com, dev.azure.com ]
-        repoUrl: ${{ parameters.repoUrl | parseRepoUrl }}
+        repoUrl: '${{ parameters.repoUrl | parseRepoUrl }}'
+        # dev.azure.com?owner=Backstage&repo=foo_bar_baz&organization=tshooter
 
     - id: enable-build
       name: Enable CI pipeline
