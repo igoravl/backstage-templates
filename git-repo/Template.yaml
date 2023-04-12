@@ -53,7 +53,7 @@ spec:
       name: Debug
       action: debug:log
       input:
-        message: '! dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
+        message: '! '
     - id: download-readme
       name: Fetch README
       action: fetch:template
@@ -74,7 +74,7 @@ spec:
       action: publish:azure
       input:
         allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?owner=Backstage&repo=owner-repo&organization=tshooter'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
 
     - id: create-develop
       name: Create develop branch
@@ -82,17 +82,17 @@ spec:
       if: '${{ parameters.gitFlow }}'
       input:
         name: develop
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
     - id: enable-develop-branch-policy
       name: Enable branch policy for develop
       action: azure:repos:enable-branch-policy
       if: '${{ parameters.gitFlow }}'
       input:
         name: develop
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
     - id: enable-master-branch-policy
       name: Enable branch policy for master
       action: azure:repos:enable-branch-policy
       input:
         name: master
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'

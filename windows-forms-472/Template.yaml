@@ -69,14 +69,14 @@ spec:
       action: publish:azure
       input:
         allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
 
     - id: enable-build
       name: Enable CI pipeline
       action: azure:pipelines:create
       input:
         name: '${{ parameters.name }}-CI'
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
         sourcePath: 'azure-pipelines.yaml'
 
     - id: create-develop
@@ -85,7 +85,7 @@ spec:
       if: '${{ parameters.gitFlow }}'
       input:
         name: develop
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
 
     - id: enable-develop-branch-policy
       name: Enable branch policy for develop
@@ -94,7 +94,7 @@ spec:
       input:
         name: develop
         buildDefinitionId: "${{steps.enable-build.output.id }}"
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
 
     - id: enable-master-branch-policy
       name: Enable branch policy for master
@@ -102,7 +102,7 @@ spec:
       input:
         name: master
         buildDefinitionId: "${{steps.enable-build.output.id }}"
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
 
     - id: register
       name: Register component
@@ -116,4 +116,4 @@ spec:
       action: azure:pipelines:queue
       input:
         id: '${{steps.enable-build.output.id }}'
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
