@@ -55,7 +55,8 @@ spec:
           type: string
           ui:field: RepoUrlPicker
           ui:options:
-            allowedHosts: [ github.com, dev.azure.com ]
+            allowedHosts: [ dev.azure.com ]
+
   steps:
     - id: fetch-code
       name: Generate code
@@ -77,7 +78,7 @@ spec:
       name: Publish repository
       action: publish:azure
       input:
-        repoUrl: '${{ parameters.repoUrl | parseRepoUrl }}'
+        repoUrl: ${{ parameters.repoUrl }}
         defaultBranch: main
         # dev.azure.com?owner=Backstage&repo=foo_bar_baz&organization=tshooter
 
