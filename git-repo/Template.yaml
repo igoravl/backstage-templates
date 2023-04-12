@@ -51,7 +51,7 @@ spec:
   steps:
     - id: download-readme
       name: Fetch README
-      action: fetch:cookiecutter
+      action: fetch:template
       input:
         url: ./template
         values:

@@ -9,7 +9,7 @@ Este repositório contém o código-fonte de exemplo para gerar um novo tipo de 
 Por exemplo: Se você quiser criar um modelo para a geração de um web site em ASP.NET Core, você deve:
 
 1. Criar, em sua máquina, o código-fonte de exemplo em ASP.NET Core;
-2. Incluir os marcadores do cookiecutter para aplicar seus parâmetros no código;
+2. Incluir os marcadores do Nunjucks para aplicar seus parâmetros no código;
 3. Incluir o código parametrizado neste repositório;
 4. Ajustar o arquivo Template.yaml para refletir a lógica do seu modelo.
 

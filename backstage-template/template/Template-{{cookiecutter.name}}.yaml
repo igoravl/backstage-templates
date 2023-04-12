@@ -41,7 +41,7 @@ spec:
   steps:
     - id: fetch-plain
       name: Baixa o código-fonte do exemplo
-      action: fetch:cookiecutter
+      action: fetch:template
       input:
         url: ./template
         values:
