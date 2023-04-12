@@ -1,5 +1,5 @@
 ﻿
-namespace {{cookiecutter.namespace}}
+namespace ${{ values.namespace }}
 {
     partial class Form1
     {

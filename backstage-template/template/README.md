@@ -1,6 +1,6 @@
-# {{ cookiecutter.title }}
+# ${{ values.title  }}
 
-{{ cookiecutter.description }}
+${{ values.description  }}
 
 ## Como usar este repositório
 

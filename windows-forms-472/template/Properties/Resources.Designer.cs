@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 
-namespace {{cookiecutter.namespace}}.Properties
+namespace ${{ values.namespace }}.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -43,7 +43,7 @@ namespace {{cookiecutter.namespace}}.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("{{cookiecutter.namespace}}.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("${{ values.namespace }}.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

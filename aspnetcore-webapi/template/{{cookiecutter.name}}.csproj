@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>{{ cookiecutter.namespace }}</RootNamespace>
+    <RootNamespace>${{ values.namespace  }}</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

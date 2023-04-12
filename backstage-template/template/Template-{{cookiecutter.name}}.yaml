@@ -2,13 +2,13 @@ apiVersion: backstage.io/v1beta2
 kind: Template
 # some metadata about the template itself
 metadata:
-  name: {{ cookiecutter.name }}
-  title: {{ cookiecutter.title }}
-  description: {{ cookiecutter.description }}
-  tags: [ {{ cookiecutter.tags }} ]
+  name: ${{ values.name  }}
+  title: ${{ values.title  }}
+  description: ${{ values.description  }}
+  tags: [ ${{ values.tags  }} ]
 spec:
-  owner: {{ cookiecutter.owner }}
-  type: {{ cookiecutter.type }}
+  owner: ${{ values.owner  }}
+  type: ${{ values.type  }}
 
   # Estes serão os parâmetros do seu modelo. Altere-os de acordo com sua necessidade
 

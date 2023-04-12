@@ -64,46 +64,46 @@ spec:
       input:
         url: ./template
         values:
-          name: '{{ parameters.name }}'
-          title: '{{ parameters.title }}'
-          description: '{{ parameters.description }}'
-          owner: '{{ parameters.owner }}'
-          type: '{{ parameters.type }}'
-          tags: '{{ parameters.tags }}'
+          name: '${{parameters.name }}'
+          title: '${{parameters.title }}'
+          description: '${{parameters.description }}'
+          owner: '${{parameters.owner }}'
+          type: '${{parameters.type }}'
+          tags: '${{parameters.tags }}'
 
     - id: publish
       name: Publish
       action: publish:azure
       input:
         allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
 
     - id: create-develop
       name: Create develop branch
       action: azure:repos:new-branch
-      if: '{{ parameters.gitFlow }}'
+      if: '${{parameters.gitFlow }}'
       input:
         name: develop
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
 
     - id: enable-develop-branch-policy
       name: Enable branch policy for develop
       action: azure:repos:enable-branch-policy
-      if: '{{ parameters.gitFlow }}'
+      if: '${{parameters.gitFlow }}'
       input:
         name: develop
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
 
     - id: enable-master-branch-policy
       name: Enable branch policy for master
       action: azure:repos:enable-branch-policy
       input:
         name: master
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
 
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
-        catalogInfoPath: '/Template-{{ parameters.name }}.yaml'
+        repoContentsUrl: '${{steps.publish.output.repoContentsUrl }}'
+        catalogInfoPath: '/Template-${{parameters.name }}.yaml'

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace {{cookiecutter.namespace}}
+namespace ${{ values.namespace }}
 {
     public class FilterConfig
     {

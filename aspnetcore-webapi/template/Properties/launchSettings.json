@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "{{ cookiecutter.name }}": {
+    "${{ values.name  }}": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

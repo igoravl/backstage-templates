@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("{{cookiecutter.title}}")]
+[assembly: AssemblyTitle("${{ values.title }}")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("{{cookiecutter.name}}")]
+[assembly: AssemblyProduct("${{ values.name }}")]
 [assembly: AssemblyCopyright("Copyright © Banco Modal 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

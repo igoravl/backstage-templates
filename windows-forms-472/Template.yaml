@@ -58,62 +58,62 @@ spec:
       input:
         url: ./template
         values:
-          name: '{{ parameters.name }}'
-          title: '{{ parameters.title }}'
-          description: '{{ parameters.description }}'
-          namespace: '{{ parameters.namespace }}'
-          owner: '{{ parameters.owner }}'
+          name: '${{parameters.name }}'
+          title: '${{parameters.title }}'
+          description: '${{parameters.description }}'
+          namespace: '${{parameters.namespace }}'
+          owner: '${{parameters.owner }}'
 
     - id: publish
       name: Publish repository
       action: publish:azure
       input:
         allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
 
     - id: enable-build
       name: Enable CI pipeline
       action: azure:pipelines:create
       input:
-        name: '{{ parameters.name }}-CI'
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        name: '${{parameters.name }}-CI'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
         sourcePath: 'azure-pipelines.yaml'
 
     - id: create-develop
       name: Create develop branch
       action: azure:repos:new-branch
-      if: '{{ parameters.gitFlow }}'
+      if: '${{parameters.gitFlow }}'
       input:
         name: develop
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
 
     - id: enable-develop-branch-policy
       name: Enable branch policy for develop
       action: azure:repos:enable-branch-policy
-      if: '{{ parameters.gitFlow }}'
+      if: '${{parameters.gitFlow }}'
       input:
         name: develop
-        buildDefinitionId: "{{ steps.enable-build.output.id }}"
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        buildDefinitionId: "${{steps.enable-build.output.id }}"
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
 
     - id: enable-master-branch-policy
       name: Enable branch policy for master
       action: azure:repos:enable-branch-policy
       input:
         name: master
-        buildDefinitionId: "{{ steps.enable-build.output.id }}"
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        buildDefinitionId: "${{steps.enable-build.output.id }}"
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
 
     - id: register
       name: Register component
       action: catalog:register
       input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
+        repoContentsUrl: '${{steps.publish.output.repoContentsUrl }}'
         catalogInfoPath: 'catalog-info.yaml'
 
     - id: queue-build
       name: Queue pipeline
       action: azure:pipelines:queue
       input:
-        id: '{{ steps.enable-build.output.id }}'
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        id: '${{steps.enable-build.output.id }}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'

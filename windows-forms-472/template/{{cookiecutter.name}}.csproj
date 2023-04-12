@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C7F860D8-9D99-40B4-BACC-B3AAB8A4C3F5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>{{cookiecutter.namespace}}</RootNamespace>
-    <AssemblyName>{{cookiecutter.name}}</AssemblyName>
+    <RootNamespace>${{ values.namespace }}</RootNamespace>
+    <AssemblyName>${{ values.name }}</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

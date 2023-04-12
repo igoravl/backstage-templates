@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="{{cookiecutter.namespace}}.MvcApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="${{ values.namespace }}.MvcApplication" Language="C#" %>

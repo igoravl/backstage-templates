@@ -55,38 +55,38 @@ spec:
       input:
         url: ./template
         values:
-          name: '{{ parameters.name }}'
-          description: '{{ parameters.description }}'
+          name: '${{parameters.name }}'
+          description: '${{parameters.description }}'
     - id: download-gitignore
       name: Fetch .gitignore
       action: fetch:file
-      if: '{{ parameters.gitIgnore }}'
+      if: '${{parameters.gitIgnore }}'
       input:
-        url: https://raw.githubusercontent.com/github/gitignore/master/{{ parameters.gitIgnore }}.gitignore
+        url: https://raw.githubusercontent.com/github/gitignore/master/${{parameters.gitIgnore }}.gitignore
         fileName: .gitignore
     - id: publish
       name: Publish
       action: publish:azure
       input:
         allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
     - id: create-develop
       name: Create develop branch
       action: azure:repos:new-branch
-      if: '{{ parameters.gitFlow }}'
+      if: '${{parameters.gitFlow }}'
       input:
         name: develop
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
     - id: enable-develop-branch-policy
       name: Enable branch policy for develop
       action: azure:repos:enable-branch-policy
-      if: '{{ parameters.gitFlow }}'
+      if: '${{parameters.gitFlow }}'
       input:
         name: develop
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'
     - id: enable-master-branch-policy
       name: Enable branch policy for master
       action: azure:repos:enable-branch-policy
       input:
         name: master
-        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo={{parameters.owner}}-{{parameters.name}}'
+        repoUrl: 'dev.azure.com?organization=bancomodal&owner=TI&repo=${{parameters.owner}}-${{parameters.name}}'

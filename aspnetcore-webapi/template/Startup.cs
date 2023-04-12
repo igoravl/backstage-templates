@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
-namespace {{ cookiecutter.namespace }}
+namespace ${{ values.namespace  }}
 {
     public class Startup
     {
@@ -30,7 +30,7 @@ namespace {{ cookiecutter.namespace }}
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "{{ cookiecutter.title }}", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "${{ values.title  }}", Version = "v1" });
             });
         }
 
@@ -41,7 +41,7 @@ namespace {{ cookiecutter.namespace }}
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "{{ cookiecutter.name }} v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "${{ values.name  }} v1"));
             }
 
             app.UseHttpsRedirection();

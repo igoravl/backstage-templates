@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace {{ cookiecutter.namespace }}.Controllers
+namespace ${{ values.namespace  }}.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -38,7 +38,7 @@ namespace {{ cookiecutter.namespace }}.Controllers
     }
 }
 
-namespace {{ cookiecutter.namespace }}
+namespace ${{ values.namespace  }}
 {
     public class WeatherForecast
     {

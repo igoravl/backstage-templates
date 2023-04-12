@@ -7,7 +7,7 @@ const { PORT = 5000, } = process.env;
 
 app.get('/', (req: Request, res: Response) => {
     res.send({
-        message: 'Hello World from {{ cookiecutter.name }}!',
+        message: 'Hello World from ${{ values.name  }}!',
     });
 });
 
