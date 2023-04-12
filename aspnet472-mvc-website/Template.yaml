@@ -50,14 +50,19 @@ spec:
           ui:field: OwnerPicker
           ui:options:
             allowedKinds: [ 'Group' ]
-
+        repoUrl:
+          title: Local do repositório
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts: [ github.com, dev.azure.com ]
   steps:
     - id: fetch-code
       name: Generate code
       action: fetch:template
       input:
         url: ./template
-        copyWithoutRender:
+        copyWithoutTemplating:
         - fonts/*
         - Scripts/*
         - Content/*
@@ -72,8 +77,8 @@ spec:
       name: Publish repository
       action: publish:azure
       input:
-        allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}'
+        allowedHosts: [ github.com, dev.azure.com ]
+        repoUrl: ${{ parameters.repoUrl | parseRepoUrl }}
 
     - id: enable-build
       name: Enable CI pipeline
