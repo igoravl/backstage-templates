@@ -69,7 +69,7 @@ spec:
       action: publish:azure
       input:
         allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?owner=Backstage&repo=${{ parameters.owner }}-${{ parameters.name }}&organization=tshooter'
+        repoUrl: 'dev.azure.com?owner=Backstage&repo=owner-repo&organization=tshooter'
 
     - id: create-develop
       name: Create develop branch
