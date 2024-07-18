@@ -71,28 +71,25 @@ spec:
     #     fileName: .gitignore
     - id: publish
       name: Publish
-      action: publish:azure
+      action: publish:github
       input:
-        allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
 
-    - id: create-develop
-      name: Create develop branch
-      action: azure:repos:new-branch
-      if: '${{ parameters.gitFlow }}'
+    # The final step is to register our new component in the catalog.
+    - id: register
+      name: Register
+      action: catalog:register
       input:
-        name: develop
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
-    - id: enable-develop-branch-policy
-      name: Enable branch policy for develop
-      action: azure:repos:enable-branch-policy
-      if: '${{ parameters.gitFlow }}'
-      input:
-        name: develop
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
-    - id: enable-master-branch-policy
-      name: Enable branch policy for master
-      action: azure:repos:enable-branch-policy
-      input:
-        name: master
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: '/catalog-info.yaml'
+
+  # Outputs are displayed to the user after a successful execution of the template.
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps['publish'].output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps['register'].output.entityRef }}
