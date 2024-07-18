@@ -3,96 +3,39 @@ kind: Template
 # some metadata about the template itself
 metadata:
   name: git-repo
-  title: Repositório Git
-  description: Use este modelo para criar um novo repositório Git no Azure DevOps
+  title: Git Repository
+  description: Use this template to create a new Git repository
   tags: ['devops', 'azure-devops', 'git']
 spec:
-  owner: cloudmotionbr/backstage
+  owner: igoravl/backstage-templates
   type: devops
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
-    - title: Informações sobre o repositório
+    - title: Repository Information
       required: [ name, description, gitFlow, owner]
       properties:
         name:
-          title: Nome do repositório
+          title: Repository Name
           type: string
-          description: Informe o nome do novo repositório Git. Use apenas letras, números e hífens.
+          description: Enter the name of the new Git repository. Use only letters, numbers, and hyphens.
         description:
-          title: Descrição
+          title: Description
           type: string
-          description: Descrição do seu projeto/repositório.
+          description: Description of your project/repository.
           ui:options:
             rows: 5
         gitFlow: 
-          title: Fluxo de trabalho Git 
+          title: Git Workflow 
           type: boolean
-          description: Informe o fluxo de trabalho Git que será usado no seu repositório
+          description: Specify the Git workflow to be used in your repository
           ui:widget: radio
           enumNames:
             - GitFlow
             - GitHubFlow
         gitIgnore:
-          title: Arquivo .gitignore
+          title: .gitignore File
           type: string
-          description: Inclui arquivo .gitignore padrão no repositório?
+          description: Include a standard .gitignore file in the repository?
           enum: ['Node', 'VisualStudio', 'Global/VisualStudioCode']
           enumNames: ['Node.js', 'Visual Studio', 'Visual Studio Code']
-        owner:
-          title: Squad
-          description: O nome da squad responsável por este repositório
-          type: string
-          ui:field: OwnerPicker
-          ui:options:
-            allowedKinds: [ 'Group' ]
-
-  # here's the steps that are executed in series in the scaffolder backend
-  steps:
-    - id: debug
-      name: Debug
-      action: debug:log
-      input:
-        message: '! '
-    - id: download-readme
-      name: Fetch README
-      action: fetch:template
-      input:
-        url: ./template
-        values:
-          name: '${{ parameters.name }}'
-          description: '${{ parameters.description }}'
-    # - id: download-gitignore
-    #   name: Fetch .gitignore
-    #   action: fetch:file
-    #   if: '${{ parameters.gitIgnore }}'
-    #   input:
-    #     url: https://raw.githubusercontent.com/github/gitignore/master/${{ parameters.gitIgnore }}.gitignore
-    #     fileName: .gitignore
-    - id: publish
-      name: Publish
-      action: publish:azure
-      input:
-        allowedHosts: ['dev.azure.com']
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
-
-    - id: create-develop
-      name: Create develop branch
-      action: azure:repos:new-branch
-      if: '${{ parameters.gitFlow }}'
-      input:
-        name: develop
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
-    - id: enable-develop-branch-policy
-      name: Enable branch policy for develop
-      action: azure:repos:enable-branch-policy
-      if: '${{ parameters.gitFlow }}'
-      input:
-        name: develop
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
-    - id: enable-master-branch-policy
-      name: Enable branch policy for master
-      action: azure:repos:enable-branch-policy
-      input:
-        name: master
-        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
