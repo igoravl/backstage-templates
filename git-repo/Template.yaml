@@ -7,7 +7,7 @@ metadata:
   description: Use this template to create a new Git repository
   tags: ['devops', 'azure-devops', 'git']
 spec:
-  owner: igoravl/backstage-templates
+  owner: cloudmotionbr/backstage
   type: devops
 
   # these are the steps which are rendered in the frontend with the form input
@@ -39,3 +39,60 @@ spec:
           description: Include a standard .gitignore file in the repository?
           enum: ['Node', 'VisualStudio', 'Global/VisualStudioCode']
           enumNames: ['Node.js', 'Visual Studio', 'Visual Studio Code']
+        owner:
+          title: Squad
+          description: The name of the squad responsible for this repository
+          type: string
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds: [ 'Group' ]
+
+  # here's the steps that are executed in series in the scaffolder backend
+  steps:
+    - id: debug
+      name: Debug
+      action: debug:log
+      input:
+        message: '! '
+    - id: download-readme
+      name: Fetch README
+      action: fetch:template
+      input:
+        url: ./template
+        values:
+          name: '${{ parameters.name }}'
+          description: '${{ parameters.description }}'
+    # - id: download-gitignore
+    #   name: Fetch .gitignore
+    #   action: fetch:file
+    #   if: '${{ parameters.gitIgnore }}'
+    #   input:
+    #     url: https://raw.githubusercontent.com/github/gitignore/master/${{ parameters.gitIgnore }}.gitignore
+    #     fileName: .gitignore
+    - id: publish
+      name: Publish
+      action: publish:azure
+      input:
+        allowedHosts: ['dev.azure.com']
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
+
+    - id: create-develop
+      name: Create develop branch
+      action: azure:repos:new-branch
+      if: '${{ parameters.gitFlow }}'
+      input:
+        name: develop
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
+    - id: enable-develop-branch-policy
+      name: Enable branch policy for develop
+      action: azure:repos:enable-branch-policy
+      if: '${{ parameters.gitFlow }}'
+      input:
+        name: develop
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
+    - id: enable-master-branch-policy
+      name: Enable branch policy for master
+      action: azure:repos:enable-branch-policy
+      input:
+        name: master
+        repoUrl: 'dev.azure.com?organization=tshooter&owner=Backstage&repo=${{ parameters.owner | replace("group:default/", "") }}-${{ parameters.name }}'
