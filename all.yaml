@@ -6,3 +6,5 @@ metadata:
 spec:
   targets:
     - ./git-repo/Template.yaml
+    - ./aspnetcore-webapi/Template.yaml
+    - ./nodejs-webapi/Template.yaml
