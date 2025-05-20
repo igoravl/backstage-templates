@@ -1,18 +1,18 @@
-# ${{ values.name  }}
+# ${{ values.name }}
 
-${{ values.description  }}
+${{ values.description }}
 
-## Descrição deste repositório
+## Repository Description
 
-TODO: Inclua aqui uma descrição do conteúdo deste repositório, e de como os desenvolvedores podem se preparar para usar este código em seu computador.
+TODO: Add here a description of the contents of this repository, and how developers can prepare to use this code on their computers.
 
-Alguns pontos que você pode incluir:
+Some points you may want to include:
 
-1. Processo de Instalação
-2. Dependências de Software
+1. Installation Process
+2. Software Dependencies
 3. Releases
-4. APIs expostas e/ou consumidas
+4. Exposed and/or Consumed APIs
 
-## Build e Teste
+## Build and Test
 
-TODO: Descreva aqui como compilar e testar o seu código.
+TODO: Describe here how to build and test your code.

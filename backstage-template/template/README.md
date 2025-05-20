@@ -1,16 +1,18 @@
-# ${{ values.title  }}
+# ${{ values.name }}
 
-${{ values.description  }}
+${{ values.description }}
 
-## Como usar este repositório
+## Repository Description
 
-Este repositório contém o código-fonte de exemplo para gerar um novo tipo de componente no Backstage. Você pode incluir arquivos de exemplo e outros artefatos que serão gerados quando um desenvolvedor quiser criar uma nova instância deste componente.
+TODO: Add here a description of the contents of this repository, and how developers can prepare to use this code on their computers.
 
-Por exemplo: Se você quiser criar um modelo para a geração de um web site em ASP.NET Core, você deve:
+Some points you may want to include:
 
-1. Criar, em sua máquina, o código-fonte de exemplo em ASP.NET Core;
-2. Incluir os marcadores do Nunjucks para aplicar seus parâmetros no código;
-3. Incluir o código parametrizado neste repositório;
-4. Ajustar o arquivo Template.yaml para refletir a lógica do seu modelo.
+1. Installation Process
+2. Software Dependencies
+3. Releases
+4. Exposed and/or Consumed APIs
 
-Não se esqueça de substituir o texto deste arquivo README, colocando aqui a descrição do seu modelo (o que ele faz, quais os parâmetros necessários etc.)
+## Build and Test
+
+TODO: Describe here how to build and test your code.
