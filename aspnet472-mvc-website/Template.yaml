@@ -6,7 +6,7 @@ metadata:
   description: Use este modelo para criar um novo projeto de Web Site usando o ASP.NET com .NET Framework 4.7.2
 
 spec:
-  owner: cloudmotionbr/backstage
+  owner: igoravl
   type: website
 
   parameters:

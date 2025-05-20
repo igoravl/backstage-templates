@@ -3,48 +3,48 @@ kind: Template
 metadata:
   name: aspnet-core-webapi
   title: ASP.NET Core 5.0 Web API
-  description: Use este modelo para criar um novo projeto de Web API usando o ASP.NET Core 5.0
+  description: Use this template to create a new Web API project using ASP.NET Core 5.0
   tags: [dotnet, webapi, dotnetcore, aspnetcore]
 
 spec:
-  owner: cloudmotionbr/backstage
+  owner: igoravl
   type: service
   parameters:
-    - title: Configurações do projeto
+    - title: Project Configuration
       required: [name, title, description, namespace]
       properties:
         name:
-          title: Nome
+          title: Name
           type: string
-          description: Nome do seu projeto. Use apenas letras, números, pontos e hífens.
+          description: Name of your project. Use only letters, numbers, dots, and hyphens.
           ui:autofocus: true
         title:
-          title: Título
+          title: Title
           type: string
-          description: Nome amigável do seu projeto, que será exibido no README e no catálogo de componentes.
+          description: Friendly name of your project, which will be displayed in the README and component catalog.
         description:
-          title: Descrição
+          title: Description
           type: string
-          description: Breve descrição do seu projeto.
+          description: Brief description of your project.
           ui:options:
             rows: 5
         namespace:
-          title: Namespace-raíz
+          title: Root Namespace
           type: string
-          description: O namespace-raíz do projeto. Utilize apenas letras e pontos.
+          description: The root namespace of the project. Use only letters and dots.
         owner:
-          title: Proprietário(s)
+          title: Owner(s)
           type: string
-          description: Equipe responsável pelo projeto
+          description: Team responsible for the project
           ui:field: OwnerPicker
           ui:options:
-            allowedKinds: [Group]
-    - title: Configurações do repositório
+            allowedKinds: [Group]    
+    - title: Repository Configuration
       required:
         - repoUrl
       properties: 
         repoUrl:
-          title: Local do repositório
+          title: Repository Location
           type: string
           ui:field: RepoUrlPicker
           ui:options:

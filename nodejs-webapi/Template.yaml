@@ -6,7 +6,7 @@ metadata:
   description: Use este modelo para criar um novo projeto de Web API usando Node.js com o framework Express
 
 spec:
-  owner: cloudmotionbr/backstage
+  owner: igoravl
   type: service
 
   parameters:

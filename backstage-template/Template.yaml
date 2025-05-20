@@ -6,7 +6,7 @@ metadata:
   title: Modelo do Backstage
   description: Use este modelo para criar um novo modelo de componente no Backstage
 spec:
-  owner: cloudmotionbr/backstage
+  owner: igoravl
   type: devops
 
   # these are the steps which are rendered in the frontend with the form input
