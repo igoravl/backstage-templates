@@ -63,7 +63,7 @@ spec:
           title: '${{ parameters.title }}'
           description: '${{ parameters.description }}'
           namespace: '${{ parameters.namespace }}'
-          destination: '{{ parameters.repoUrl | parseRepoUrl }}'
+          destination: '${{ parameters.repoUrl | parseRepoUrl }}'
           owner: '${{ parameters.owner }}'
 
     - id: publish
