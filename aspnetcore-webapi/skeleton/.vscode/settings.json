@@ -1,0 +1,7 @@
+{
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+        {
+            "text": "Use conventional commit message format. Write messages in the imperative mood. Use the present tense. Start with a capital letter. Do not end with a period. Write in pt-BR.",
+        }
+    ]
+}

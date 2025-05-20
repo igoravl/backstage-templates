@@ -1,0 +1,26 @@
+name: "CodeQL Configuration"
+
+queries:
+  - uses: security-extended
+  - uses: security-and-quality
+
+paths:
+  - src
+  - Controllers
+  - Services
+  - Program.cs
+  - Startup.cs
+
+paths-ignore:
+  - '**/obj/**'
+  - '**/bin/**'
+  - '**/*.Test*/**'
+  - '**/*Tests/**'
+  - '**/TestData/**'
+  - '**/wwwroot/lib/**'
+
+query-filters:
+  - exclude:
+      problem.severity:
+        - note
+        - recommendation

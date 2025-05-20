@@ -1,0 +1,39 @@
+version: 2
+updates:
+  # Maintain dependencies for NuGet
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "security"
+    reviewers:
+      - "${{values.owner}}"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    groups:
+      microsoft-packages:
+        patterns:
+          - "Microsoft.*"
+      testing-packages:
+        patterns:
+          - "xunit*"
+          - "Moq"
+          - "FluentAssertions"
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "automation"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
