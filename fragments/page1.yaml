@@ -8,7 +8,7 @@ properties:
     ui:autofocus: true
     ui:options:
       rows: 3
-  #$yaml: https://gist.githubusercontent.com/igoravl/9baa2867c5d7309cccad31424f05b1aa/raw/2a95c70cd5475f1aec0e04582e12e76a829fe2a0/field1.yaml
 
   
+
 
