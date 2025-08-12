@@ -4,4 +4,4 @@ myField1:
   description: This is my field 1
   ui:widget: textarea
   ui:options:
-    rows: 5
+    rows: 3
